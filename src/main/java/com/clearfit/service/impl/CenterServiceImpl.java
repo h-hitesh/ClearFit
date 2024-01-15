@@ -30,7 +30,7 @@ public class CenterServiceImpl implements CenterService {
         if (centers.containsKey(name)) {
             centers.put(name, new Center(name));
         }
-        Center center = centers.get(name);
+        Center center = centers.getOrDefault(name, new Center());
         activities.forEach(center::addActivities);
         centers.put(name, center);
     }
@@ -40,7 +40,7 @@ public class CenterServiceImpl implements CenterService {
         if (centers.containsKey(name)) {
             centers.put(name, new Center(name));
         }
-        centers.get(name).setCenterTime(slots);
+        centers.getOrDefault(name, new Center()).setCenterTime(slots);
 
     }
 }

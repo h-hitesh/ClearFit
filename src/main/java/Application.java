@@ -30,7 +30,7 @@ public class Application {
         centerService.addCenterTimings(centerName, List.of(new Slot(7, 10), new Slot(19, 22)));
         centerService.addCenterActivities(centerName, List.of(new Activity("weights"), new Activity("cardio"), new Activity("yoga")));
         adminService.addWorkout(centerName, "weights", new Slot(18, 19), 100);
-        adminService.addWorkout(centerName, "swimming", new Slot(19, 20), 100);
+//        adminService.addWorkout(centerName, "swimming", new Slot(19, 20), 100);
         adminService.addWorkout(centerName, "cardio", new Slot(19, 20), 20);
         adminService.addWorkout(centerName, "cardio", new Slot(20, 21), 100);
 

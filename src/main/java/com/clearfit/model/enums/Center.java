@@ -35,10 +35,11 @@ public class Center {
     }
 
     public Optional<Activity> getActivityByName(String activityName) {
-        return Optional.of(activities.get(name));
+        return Optional.of(activities.getOrDefault(name, new Activity(activityName)));
     }
 
-    public void addActivities(Activity activity){
+    public void addActivities(Activity activity) {
+
         activities.put(activity.getName(), activity);
     }
 
@@ -48,15 +49,17 @@ public class Center {
             throw new RuntimeException("Activity Not Found");
         }
         boolean validStart = false, validEnd = false;
-        for (Slot s : centerTime) {
-            if (!validStart && s.getStart() > slot.getStart() && s.getEnd() < slot.getEnd())
-                validStart = true;
-            if (!validEnd && s.getEnd() > slot.getEnd() && s.getStart() < slot.getEnd())
-                validEnd = true;
+        if (centerTime != null) {
+            for (Slot s : centerTime) {
+                if (!validStart && s.getStart() > slot.getStart() && s.getEnd() < slot.getEnd())
+                    validStart = true;
+                if (!validEnd && s.getEnd() > slot.getEnd() && s.getStart() < slot.getEnd())
+                    validEnd = true;
 
-        }
-        if (!validEnd || !validStart) {
-            throw new RuntimeException("Unable to add slot");
+            }
+            if (!validEnd || !validStart) {
+                throw new RuntimeException("Unable to add slot");
+            }
         }
         activity.setSlot(slot);
         activity.setAvailable(availableSlots);
